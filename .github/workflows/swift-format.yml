@@ -5,9 +5,11 @@ on:
 
 jobs:
   format:
-    runs-on: macos-26
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Install swift-format
+        run: brew install swift-format
       - name: Format code
         run: swift-format format --recursive --in-place Sources Tests
       - name: Commit changes

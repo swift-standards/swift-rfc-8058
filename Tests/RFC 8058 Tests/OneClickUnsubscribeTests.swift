@@ -3,13 +3,13 @@ import Testing
 
 @testable import RFC_8058
 
-@Suite("RFC 8058 One-Click Unsubscribe Tests")
-struct OneClickUnsubscribeTests {
+@Suite
+struct `RFC 8058 One-Click Unsubscribe Tests` {
 
     // MARK: - Initialization Tests
 
-    @Test("OneClick.Unsubscribe can be created with HTTPS URI")
-    func testHTTPSInitialization() throws {
+    @Test
+    func `OneClick.Unsubscribe can be created with HTTPS URI`() throws {
         let baseURL = try RFC_3987.IRI("https://example.com/unsubscribe")
         let token = "abc123xyz"
 
@@ -22,8 +22,8 @@ struct OneClickUnsubscribeTests {
         #expect(oneClick.httpsURI.value == "https://example.com/unsubscribe/abc123xyz")
     }
 
-    @Test("OneClick.Unsubscribe throws error for non-HTTPS URI")
-    func testHTTPSRequired() throws {
+    @Test
+    func `OneClick.Unsubscribe throws error for non-HTTPS URI`() throws {
         let httpURL = try RFC_3987.IRI("http://example.com/unsubscribe")
 
         #expect(throws: RFC_8058.OneClickError.self) {
@@ -34,8 +34,8 @@ struct OneClickUnsubscribeTests {
         }
     }
 
-    @Test("OneClick.Unsubscribe throws error for empty token")
-    func testEmptyTokenRejected() throws {
+    @Test
+    func `OneClick.Unsubscribe throws error for empty token`() throws {
         let baseURL = try RFC_3987.IRI("https://example.com/unsubscribe")
 
         #expect(throws: RFC_8058.OneClickError.self) {
@@ -46,8 +46,8 @@ struct OneClickUnsubscribeTests {
         }
     }
 
-    @Test("OneClick.Unsubscribe handles base URL with trailing slash")
-    func testTrailingSlashHandling() throws {
+    @Test
+    func `OneClick.Unsubscribe handles base URL with trailing slash`() throws {
         let baseWithSlash = try RFC_3987.IRI("https://example.com/unsubscribe/")
         let baseWithoutSlash = try RFC_3987.IRI("https://example.com/unsubscribe")
         let token = "abc123"
@@ -66,8 +66,8 @@ struct OneClickUnsubscribeTests {
         #expect(oneClick2.httpsURI.value == "https://example.com/unsubscribe/abc123")
     }
 
-    @Test("OneClick.Unsubscribe can be created with IRI.Representable (URL)")
-    func testURLConvenience() throws {
+    @Test
+    func `OneClick.Unsubscribe can be created with IRI.Representable (URL)`() throws {
         let baseURL = URL(string: "https://example.com/unsubscribe")!
         let token = "secure-token-123"
 
@@ -82,8 +82,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Header Rendering Tests
 
-    @Test("Renders RFC 8058 compliant headers")
-    func testHeaderRendering() throws {
+    @Test
+    func `Renders RFC 8058 compliant headers`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "token123"
@@ -97,8 +97,8 @@ struct OneClickUnsubscribeTests {
         #expect(headers["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click")
     }
 
-    @Test("List-Unsubscribe header uses angle brackets per RFC 2369")
-    func testAngleBrackets() throws {
+    @Test
+    func `List-Unsubscribe header uses angle brackets per RFC 2369`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "abc"
@@ -111,8 +111,8 @@ struct OneClickUnsubscribeTests {
         #expect(unsubscribeHeader.hasSuffix(">"))
     }
 
-    @Test("List-Unsubscribe-Post has exact value per RFC 8058")
-    func testPostHeaderValue() throws {
+    @Test
+    func `List-Unsubscribe-Post has exact value per RFC 8058`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "token"
@@ -126,8 +126,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Token Validation Tests
 
-    @Test("Token validation succeeds with correct token")
-    func testValidTokenValidation() throws {
+    @Test
+    func `Token validation succeeds with correct token`() throws {
         let token = "correct-token-123"
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
@@ -139,8 +139,8 @@ struct OneClickUnsubscribeTests {
         #expect(isValid == true)
     }
 
-    @Test("Token validation fails with incorrect token")
-    func testInvalidTokenValidation() throws {
+    @Test
+    func `Token validation fails with incorrect token`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "correct-token"
@@ -151,8 +151,8 @@ struct OneClickUnsubscribeTests {
         #expect(isValid == false)
     }
 
-    @Test("Token validation fails with different length token")
-    func testDifferentLengthTokenValidation() throws {
+    @Test
+    func `Token validation fails with different length token`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "short"
@@ -163,8 +163,8 @@ struct OneClickUnsubscribeTests {
         #expect(isValid == false)
     }
 
-    @Test("Token validation uses constant-time comparison")
-    func testConstantTimeComparison() throws {
+    @Test
+    func `Token validation uses constant-time comparison`() throws {
         // This test verifies that validation is constant-time by checking
         // that tokens of the same length take similar time regardless of
         // how many characters match
@@ -194,8 +194,8 @@ struct OneClickUnsubscribeTests {
         // (constant-time comparison ensures timing doesn't reveal which chars match)
     }
 
-    @Test("Token validation with empty string")
-    func testEmptyTokenValidation() throws {
+    @Test
+    func `Token validation with empty string`() throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "valid-token"
@@ -208,8 +208,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Security Tests
 
-    @Test("Opaque token should be URL-safe")
-    func testURLSafeToken() throws {
+    @Test
+    func `Opaque token should be URL-safe`() throws {
         // Common URL-safe characters
         let urlSafeToken = "abc123-_."
 
@@ -221,8 +221,8 @@ struct OneClickUnsubscribeTests {
         #expect(oneClick.httpsURI.value.contains(urlSafeToken))
     }
 
-    @Test("Typical HMAC-based token works")
-    func testHMACStyleToken() throws {
+    @Test
+    func `Typical HMAC-based token works`() throws {
         // Simulate base64url-encoded HMAC token
         let hmacToken = "dGVzdEBleGFtcGxlLmNvbTpuZXdzbGV0dGVy"
 
@@ -237,8 +237,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Codable Tests
 
-    @Test("OneClick.Unsubscribe is Codable")
-    func testCodable() throws {
+    @Test
+    func `OneClick.Unsubscribe is Codable`() throws {
         let original = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "test-token-123"
@@ -253,8 +253,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Hashable Tests
 
-    @Test("OneClick.Unsubscribe is Hashable")
-    func testHashable() throws {
+    @Test
+    func `OneClick.Unsubscribe is Hashable`() throws {
         let oneClick1 = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "token123"
@@ -283,8 +283,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Sendable Tests
 
-    @Test("OneClick.Unsubscribe is Sendable")
-    func testSendable() async throws {
+    @Test
+    func `OneClick.Unsubscribe is Sendable`() async throws {
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
             opaqueToken: "token"
@@ -300,8 +300,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Integration with RFC 2369
 
-    @Test("Can be combined with RFC 2369 List-Unsubscribe")
-    func testRFC2369Integration() throws {
+    @Test
+    func `Can be combined with RFC 2369 List-Unsubscribe`() throws {
         // Note: This test demonstrates how RFC 8058 extends RFC 2369
         // Both List-Unsubscribe headers can coexist
 
@@ -322,8 +322,8 @@ struct OneClickUnsubscribeTests {
 
     // MARK: - Realistic Example
 
-    @Test("Realistic unsubscribe workflow")
-    func testRealisticWorkflow() throws {
+    @Test
+    func `Realistic unsubscribe workflow`() throws {
         // Simulate real-world token generation
         let subscriber = "user@example.com"
         let list = "newsletter"

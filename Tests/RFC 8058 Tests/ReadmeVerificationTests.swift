@@ -3,11 +3,11 @@ import Testing
 
 @testable import RFC_8058
 
-@Suite("README Verification")
-struct ReadmeVerificationTests {
+@Suite
+struct `README Verification` {
 
-    @Test("Example from README: Creating One-Click Unsubscribe")
-    func exampleCreatingOneClick() throws {
+    @Test
+    func `Example from README: Creating One-Click Unsubscribe`() throws {
         // Simplified from README line 36-63 (without CryptoKit for test simplicity)
         let token = "secure-token-123"
 
@@ -20,8 +20,8 @@ struct ReadmeVerificationTests {
         #expect(oneClick.httpsURI.value.contains("https://example.com/unsubscribe"))
     }
 
-    @Test("Example from README: Rendering Email Headers")
-    func exampleRenderingHeaders() throws {
+    @Test
+    func `Example from README: Rendering Email Headers`() throws {
         let token = "token123"
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),
@@ -35,8 +35,8 @@ struct ReadmeVerificationTests {
         #expect(headers["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click")
     }
 
-    @Test("Example from README: Using Foundation URLs")
-    func exampleFoundationURLs() throws {
+    @Test
+    func `Example from README: Using Foundation URLs`() throws {
         // From README line 101-107
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: URL(string: "https://example.com/unsubscribe")!,
@@ -46,8 +46,8 @@ struct ReadmeVerificationTests {
         #expect(oneClick.httpsURI.value.contains("https://example.com/unsubscribe"))
     }
 
-    @Test("Example from README: Token Validation")
-    func exampleTokenValidation() throws {
+    @Test
+    func `Example from README: Token Validation`() throws {
         let token = "valid-token-123"
         let oneClick = try RFC_8058.OneClick.Unsubscribe(
             baseURL: try RFC_3987.IRI("https://example.com/unsubscribe"),

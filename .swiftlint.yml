@@ -2,7 +2,6 @@ disabled_rules:
   - line_length
   - trailing_comma
   - redundant_discardable_let
-  - type_name
 
 opt_in_rules:
   - explicit_init
@@ -63,8 +62,6 @@ identifier_name:
     - URL
     - to
     - db
-    - a
-    - b
 
 # Type name settings - allow RFC_XXXX pattern
 type_name:

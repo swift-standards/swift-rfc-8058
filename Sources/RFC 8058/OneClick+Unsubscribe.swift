@@ -1,4 +1,3 @@
-import Foundation
 import RFC_3987
 
 extension RFC_8058.OneClick {
@@ -99,9 +98,9 @@ extension RFC_8058.OneClick {
         ///     let key = SymmetricKey(data: secret.data(using: .utf8)!)
         ///     let hmac = HMAC<SHA256>.authenticationCode(for: data, using: key)
         ///     return Data(hmac).base64EncodedString()
-        ///         .replacingOccurrences(of: "+", with: "-")
-        ///         .replacingOccurrences(of: "/", with: "_")
-        ///         .replacingOccurrences(of: "=", with: "")
+        ///         .replacing("+", with: "-")
+        ///         .replacing("/", with: "_")
+        ///         .replacing("=", with: "")
         /// }
         ///
         /// let token = generateToken(

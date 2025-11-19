@@ -46,9 +46,9 @@ func generateSecureToken(subscriber: String, list: String, secret: String) -> St
     let key = SymmetricKey(data: secret.data(using: .utf8)!)
     let hmac = HMAC<SHA256>.authenticationCode(for: data, using: key)
     return Data(hmac).base64EncodedString()
-        .replacingOccurrences(of: "+", with: "-")
-        .replacingOccurrences(of: "/", with: "_")
-        .replacingOccurrences(of: "=", with: "")
+        .replacing("+", with: "-")
+        .replacing("/", with: "_")
+        .replacing("=", with: "")
 }
 
 let token = generateSecureToken(
@@ -160,9 +160,9 @@ let key = SymmetricKey(size: .bits256)
 let data = "\(subscriber):\(list):\(timestamp)".data(using: .utf8)!
 let hmac = HMAC<SHA256>.authenticationCode(for: data, using: key)
 let token = Data(hmac).base64EncodedString()
-    .replacingOccurrences(of: "+", with: "-")  // URL-safe
-    .replacingOccurrences(of: "/", with: "_")  // URL-safe
-    .replacingOccurrences(of: "=", with: "")   // Remove padding
+    .replacing("+", with: "-")  // URL-safe
+    .replacing("/", with: "_")  // URL-safe
+    .replacing("=", with: "")   // Remove padding
 ```
 
 ### Token Validation

@@ -1,4 +1,3 @@
-import Foundation
 import RFC_3987
 import Testing
 
@@ -334,9 +333,9 @@ struct OneClickUnsubscribeTests {
         let tokenData = "\(subscriber):\(list):\(secret)"
         let token = tokenData.data(using: .utf8)!
             .base64EncodedString()
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "=", with: "")
+            .replacing("+", with: "-")
+            .replacing("/", with: "_")
+            .replacing("=", with: "")
 
         // Create one-click unsubscribe
         let oneClick = try RFC_8058.OneClick.Unsubscribe(

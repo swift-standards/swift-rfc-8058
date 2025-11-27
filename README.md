@@ -240,12 +240,14 @@ emailHeaders.merge([String: String](oneClickUnsubscribe: oneClick)) { _, new in 
 
 - [RFC 2369](https://www.ietf.org/rfc/rfc2369.txt) - The Use of URLs as Meta-Syntax for Core Mail List Commands
 - [RFC 3987](https://www.ietf.org/rfc/rfc3987.txt) - Internationalized Resource Identifiers (IRIs)
+- [RFC 6068](https://www.rfc-editor.org/rfc/rfc6068) - The 'mailto' URI Scheme
 - [RFC 8058](https://www.ietf.org/rfc/rfc8058.txt) - Signaling One-Click Functionality for List Email Headers
 
 ## Related Packages
 
 - [swift-rfc-2369](https://github.com/swift-standards/swift-rfc-2369) - List email headers (foundation for RFC 8058)
 - [swift-rfc-3987](https://github.com/swift-standards/swift-rfc-3987) - IRI implementation
+- [swift-rfc-6068](https://github.com/swift-standards/swift-rfc-6068) - The 'mailto' URI Scheme (fallback unsubscribe)
 
 ## Why RFC 8058 Matters
 

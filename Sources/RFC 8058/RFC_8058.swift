@@ -1,4 +1,5 @@
-@_exported import RFC_3987
+public import Foundation
+@_exported public import RFC_3987
 
 /// RFC 8058: Signaling One-Click Functionality for List Email Headers
 ///

@@ -27,7 +27,7 @@ This package provides a Swift implementation of the one-click unsubscribe mechan
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-standards/swift-rfc-8058", branch: "main")
+    .package(url: "https://github.com/swift-standards/swift-rfc-8058", from: "0.1.0")
 ]
 ```
 

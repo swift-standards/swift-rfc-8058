@@ -28,7 +28,10 @@ let package = Package(
         ),
         .testTarget(
             name: "RFC 8058".tests,
-            dependencies: ["RFC 8058"]
+            dependencies: [
+                "RFC 8058",
+                .product(name: "RFC 3987 Foundation", package: "swift-rfc-3987")
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

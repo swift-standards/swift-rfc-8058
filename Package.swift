@@ -17,7 +17,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../swift-rfc-3987.git")
+        .package(path: "../swift-rfc-3987")
     ],
     targets: [
         .target(

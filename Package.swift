@@ -17,7 +17,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-rfc-3987.git", from: "0.3.2")
+        .package(path: "../swift-rfc-3987.git")
     ],
     targets: [
         .target(
